@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "registro": 1001,
+        "titulo": "Implementar Autenticação JWT",
+        "descricao": "Configurar o Spring Security e criar o endpoint de login gerando tokens JWT.",
+        "dataCriacao": "2025-10-25T09:00:00",
+        "prazoEntrega": "2026-11-01",
+        "prioridade": "ALTA",
+        "status": "EM_ANDAMENTO",
+        "responsavel": "Carlos Silva"
+    },
+    {
+        "id": 2,
+        "registro": 1002,
+        "titulo": "Criar Protótipo no Figma",
+        "descricao": "Desenhar as telas de Dashboard e Cadastro de Tarefas seguindo o guia de estilos.",
+        "dataCriacao": "2023-10-26T14:30:00",
+        "prazoEntrega": "2023-10-30",
+        "prioridade": "MEDIA",
+        "status": "CONCLUIDA",
+        "responsavel": "Ana Paula"
+    },
+    {
+        "id": 3,
+        "registro": 1003,
+        "titulo": "Modelagem do Banco de Dados",
+        "descricao": "Criar o diagrama ER e os scripts SQL para as tabelas de usuários e tarefas.",
+        "dataCriacao": "2025-10-27T10:15:00",
+        "prazoEntrega": "2025-12-10",
+        "prioridade": "ALTA",
+        "status": "PLANEJADA",
+        "responsavel": "Roberto Santos"
+    },
+    {
+        "id": 4,
+        "registro": 1004,
+        "titulo": "Refatorar Componente de Modal",
+        "descricao": "Separar a lógica do modal de criação de tarefas e aplicar Styled Components.",
+        "dataCriacao": "2023-10-28T11:00:00",
+        "prazoEntrega": "2023-11-02",
+        "prioridade": "BAIXA",
+        "status": "EM_ANDAMENTO",
+        "responsavel": "Mariana Costa"
+    },
+    {
+        "id": 5,
+        "registro": 1005,
+        "titulo": "Configurar Pipeline de CI/CD",
+        "descricao": "Automatizar os testes e o deploy no ambiente de staging usando GitHub Actions.",
+        "dataCriacao": "2023-10-29T16:45:00",
+        "prazoEntrega": "2023-11-10",
+        "prioridade": "ALTA",
+        "status": "PLANEJADA",
+        "responsavel": "Patricia Sanches"
+    },
+    {
+        "id": 6,
+        "registro": 1006,
+        "titulo": "Correção de Bug no Drag-and-Drop",
+        "descricao": "Corrigir o erro que impede arrastar cards da coluna 'Feito' de volta para 'Em Andamento'.",
+        "dataCriacao": "2023-10-30T09:20:00",
+        "prazoEntrega": "2023-10-31",
+        "prioridade": "MEDIA",
+        "status": "EM_ANDAMENTO",
+        "responsavel": "João Pereira"
+    },
+    {
+        "id": 7,
+        "registro": 1007,
+        "titulo": "Escrever Testes Unitários",
+        "descricao": "Cobrir pelo menos 80% da camada de serviço de Tarefas com JUnit e Mockito.",
+        "dataCriacao": "2023-11-01T13:00:00",
+        "prazoEntrega": "2023-11-08",
+        "prioridade": "MEDIA",
+        "status": "PLANEJADA",
+        "responsavel": "Fernanda Lima"
+    },
+    {
+        "id": 8,
+        "registro": 1008,
+        "titulo": "Atualizar Documentação da API",
+        "descricao": "Adicionar os novos endpoints de filtro e busca no Swagger.",
+        "dataCriacao": "2023-11-02T15:10:00",
+        "prazoEntrega": "2025-12-10",
+        "prioridade": "BAIXA",
+        "status": "CONCLUIDA",
+        "responsavel": "Ricardo Alves"
+    },
+    {
+        "id": 9,
+        "registro": 1009,
+        "titulo": "Otimização de Performance",
+        "descricao": "Melhorar o tempo de carregamento da lista de tarefas implementando paginação no backend.",
+        "dataCriacao": "2023-11-03T10:30:00",
+        "prazoEntrega": "2026-11-15",
+        "prioridade": "ALTA",
+        "status": "PLANEJADA",
+        "responsavel": "Sandra Oliveira"
+    },
+    {
+        "id": 10,
+        "registro": 1010,
+        "titulo": "Reunião de Retrospectiva",
+        "descricao": "Alinhar os pontos positivos e negativos da última sprint com a equipe.",
+        "dataCriacao": "2023-11-04T09:00:00",
+        "prazoEntrega": "2023-11-04",
+        "prioridade": "BAIXA",
+        "status": "PLANEJADA",
+        "responsavel": "Gabriel Mendes"
+    }
+]
