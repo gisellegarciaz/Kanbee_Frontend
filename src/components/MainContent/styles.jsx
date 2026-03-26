@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import fundoDark from '../../assets/Backgrunds/bgTarefizDark.webp';
-import fundoLight from '../../assets/Backgrunds/bgTarefizLight.webp';
+import fundoDark from '../../assets/Backgrunds/kanbeeIDVisual-05.png';
+import fundoLight from '../../assets/Backgrunds/kanbeeIDVisual-02.png';
 
 export const InputContainer = styled.div`
     min-height: 80vh;
@@ -16,5 +16,5 @@ export const InputContainer = styled.div`
     background-attachment: fixed;
     min-height: 100vh;
     
-    box-shadow: ${props => props.theme === "light" ? 'inset 0 0 0 2000px rgba(255, 255, 255, 0.3)' : 'inset 0 0 0 2000px rgba(14, 14, 14, 0.5)'};
+    // box-shadow: ${props => props.theme === "light" ? 'inset 0 0 0 2000px rgba(255, 255, 255, 0.3)' : 'inset 0 0 0 2000px rgba(14, 14, 14, 0.5)'};
 `;
