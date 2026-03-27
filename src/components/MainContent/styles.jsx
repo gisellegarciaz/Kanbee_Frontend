@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import fundoDark from '../../assets/Backgrunds/kanbeeIDVisual-05.png';
-import fundoLight from '../../assets/Backgrunds/kanbeeIDVisual-02.png';
+// import fundoDark from '../../assets/Backgrunds/bgKanbeeDark.png';
+import fundoDark from '../../assets/Backgrunds/bgDarkProv.png';
+import fundoLight from '../../assets/Backgrunds/bgKanbeeLight.png';
 
 export const InputContainer = styled.div`
     min-height: 80vh;

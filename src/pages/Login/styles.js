@@ -1,6 +1,6 @@
-import styled, { keyframes } from 'styled-components';
-import logoClaro from '../../assets/Logos/Logo_TareFiz_Light.png';
-import logoEscuro from '../../assets/Logos/Logo_TareFiz_Dark.png';
+import styled, { keyframes, css } from 'styled-components';
+import logoClaro from '../../assets/Logos/logoDark@2x.png';
+import logoEscuro from '../../assets/Logos/logoDark@2x.png';
 
 const animacaoAparecer = keyframes`
   0% {
@@ -16,341 +16,210 @@ const animacaoAparecer = keyframes`
 export const LoginContainer = styled.div`
   min-height: 100vh;
   width: 100vw;
-  
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 1rem;
-
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 3rem;
-  }
+  @media (min-width: 768px) { padding: 2rem; }
+  @media (min-width: 1024px) { padding: 3rem; }
 `;
 
 export const LoginCard = styled.div`
   width: 100%;
-  max-width: 500px;
-
-  padding: 2.5rem 3rem;
+  max-width: 450px;
+  padding: 2.5rem 2rem;
   border-radius: 24px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  background-image: var(--glass-fill), var(--glass-border);
-  background-clip: padding-box, border-box;
-  background-origin: padding-box, border-box;
-
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
-  border: 1px solid var(--border-color);
-  box-shadow: var(--column-glass-shadow);
+  /* Efeito Glassmorphism da imagem */
+  background: ${props => props.theme === 'dark' 
+    ? 'rgba(255, 255, 255, 0.05)' 
+    : 'rgba(255, 255, 255, 0.3)'};
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 
   animation: ${animacaoAparecer} 0.5s ease-out;
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease,
-    border-color 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(14, 165, 233, 0.25);
-  }
-
-  @media (max-width: 768px) {
-    padding: 2rem;
+    box-shadow: 0 12px 40px rgba(255, 152, 0, 0.15);
   }
 
   @media (max-width: 440px) {
-    padding: 1.5rem 1.25rem;
-    border-radius: 18px;
+    padding: 2rem 1.5rem;
   }
 `;
 
-
 export const LoginHeader = styled.div`
   text-align: center;
-  margin-bottom: 2.5rem;
-
-  @media (max-width: 440px) {
-    margin-bottom: 1.5rem;
-  }
+  margin-bottom: 2rem;
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 `;
 
 export const LogoImage = styled.span`
   display: block;
-
-  width: min(15rem, 80vw);
+  width: min(15rem, 70vw);
   aspect-ratio: 2.8;
-
   background-image: url(${logoClaro});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
-  transition: background-image 0.3s ease-in-out;
-
-  @media (max-width: 440px) {
-    width: min(12rem, 70vw);
-  }
 `;
 
 export const LogoImageDark = styled.span`
   display: block;
-  width: min(15rem, 80vw);
+  width: min(15rem, 70vw);
   aspect-ratio: 2.8;
-
   background-image: url(${logoEscuro});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
-  transition: background-image 0.3s ease-in-out;
-
-  @media (max-width: 440px) {
-    width: min(12rem, 70vw);
-  }
 `;
 
 export const LoginSubtitle = styled.h2`
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 0.9rem;
   color: var(--text-color);
-  margin: 0;
+  opacity: 0.8;
   font-weight: 400;
-
-  @media (max-width: 440px) {
-    font-size: 0.95rem;
-  }
+  margin: 0;
 `;
-
-export const LoginTabs = styled.div`
-  display: flex;
-  gap: 0.75rem;
-
-  margin-bottom: 2.5rem;
-
-  border-bottom: 2px solid ${({ theme }) => theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
-
-  overflow-x: auto;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  @media (max-width: 440px) {
-    margin-bottom: 1.5rem;
-  }
-`;
-
-export const TabButton = styled.button`
-  flex: 1;
-  padding: 14px 20px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: ${({ $active }) => $active ? 'var(--primary-color)' : 'var(--text-secondary)'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-bottom: 3px solid ${({ $active }) => $active ? 'var(--primary-color)' : 'transparent'};
-  margin-bottom: -2px;
-  position: relative;
-
-  &:hover {
-    color: var(--primary-color);
-  }
-
-  @media (max-width: 768px) {
-    padding: 12px 16px;
-    font-size: 15px;
-  }
-
-  @media (max-width: 440px) {
-    padding: 10px 12px;
-    font-size: 14px;
-    flex: unset;
-    wwhite-space: nowrap;
-  }
-`;
-
 
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
-  width: 80%;
-
-  @media (max-width: 768px) {
-    gap: 1rem;
-    width: 35vw;
-  }
-
-  @media (max-width: 440px) {
-    gap: 1.25rem;
-    width: 70vw;
-  }
+  gap: 1.25rem;
+  width: 100%;
 `;
 
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-
-  @media (max-width: 440px) {
-    gap: 0.5rem;
-  }
+  gap: 0.5rem;
 `;
 
 export const FormLabel = styled.label`
-  font-weight: 400;
+  font-size: 0.9rem;
   color: var(--text-color);
-  line-height: 1.3;
-
-  @media (max-width: 440px) {
-    font-size: 0.75rem;
-  }
+  padding-left: 4px;
 `;
 
 export const FormInput = styled.input`
-  padding: 16px 18px;
-  border: 2px solid ${({ theme }) => theme === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'};
+  padding: 14px 16px;
+  ${props => props.type === 'password' && css`
+    padding-right: 48px;
+  `}
+  border: 1px solid ${props => props.theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'};
   border-radius: 12px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  outline: none;
-  font-family: inherit;
-  background: ${({ theme }) => theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.8)'};
+  font-size: 15px;
+  background: ${props => props.theme === 'dark' ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.6)'};
   color: var(--text-color);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
 
   &:focus {
-    border-color: var(--primary-color);
-    background: ${({ theme }) => theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.95)'};
-    box-shadow: 0 0 0 4px ${({ theme }) => theme === 'dark' ? 'rgba(14, 165, 233, 0.2)' : 'rgba(14, 165, 233, 0.1)'};
+    border-color: #ff9800;
+    background: ${props => props.theme === 'dark' ? 'rgba(0, 0, 0, 0.3)' : '#fff'};
   }
+`;
 
-  &::placeholder {
-    color: ${({ theme }) => theme === 'dark' ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.4)'};
-  }
+export const ForgotPasswordLink = styled.span`
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  cursor: pointer;
+  text-align: center;
+  margin-top: -8px;
+  transition: opacity 0.2s;
 
-  @media (max-width: 768px) {
-    padding: 14px 16px;
-    font-size: 15px;
-  }
-
-  @media (max-width: 440px) {
-    padding: 12px 14px;
-    font-size: 14px;
-    border-radius: 10px;
+  &:hover {
+    opacity: 1;
+    text-decoration: underline;
   }
 `;
 
 export const LoginButton = styled.button`
-  padding: 18px;
-  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  padding: 16px;
+  background: #ff9800; /* Laranja da imagem */
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 17px;
+  border-radius: 14px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
-  margin-top: 8px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.05)
-    );
-    border-radius: 12px;
-  }
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(8, 145, 178, 0.5);
+    background: #e68a00;
+    transform: translateY(-1px);
   }
 
   &:active {
     transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    padding: 16px;
-    font-size: 16px;
-  }
-
-  @media (max-width: 440px) {
-    padding: 14px;
-    font-size: 15px;
-    border-radius: 10px;
   }
 `;
 
 export const BackToLoginLink = styled.button`
   background: none;
   border: none;
-  color: var(--primary-color);
-  font-size: 0.8rem;
-  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.85rem;
   cursor: pointer;
-  text-align: center;
-  padding: 10px;
+  text-decoration: underline;
+  opacity: 0.7;
   margin-top: 10px;
-  transition: all 0.3s ease;
 
-  &:hover {
-    color: ${({ theme }) =>
-      theme === 'dark' ? 'rgba(255, 255, 255, 0.8)' : '#0c8599'};
-    text-decoration: underline;
-  }
-
-  @media (max-width: 440px) {
-    font-size: 0.75rem;
-    padding: 8px;
-  }
+  &:hover { opacity: 1; }
 `;
 
 export const RecoveryText = styled.p`
-  font-size: 1rem;
-  color: var(--text-secondary);
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
   text-align: center;
-  margin: 0 0 10px 0;
-  line-height: 1.5;
+  line-height: 1.4;
+`;
 
-  @media (max-width: 440px) {
-    font-size: 0.75rem;
+export const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+export const ToggleVisibilityButton = styled.button`
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: var(--text-color);
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
   }
 `;

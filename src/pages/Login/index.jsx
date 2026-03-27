@@ -11,170 +11,112 @@ import {
   LogoImage,
   LogoImageDark,
   LoginSubtitle,
-  LoginTabs,
-  TabButton,
   LoginForm,
   FormGroup,
   FormLabel,
   FormInput,
   LoginButton,
+  ForgotPasswordLink,
   BackToLoginLink,
-  RecoveryText
+  RecoveryText,
+  InputWrapper,
+  ToggleVisibilityButton
 } from './styles';
+import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 const Login = () => {
-  const [dadosLogin, setDadosLogin] = useState({
-    email: '',
-    senha: ''
-  });
-  const [abaAtiva, setAbaAtiva] = useState('login');
+  const [dadosLogin, setDadosLogin] = useState({ email: '', senha: '' });
+  const [verSenha, setVerSenha] = useState(false);
+  const [isRecuperando, setIsRecuperando] = useState(false);
+  const [emailRecuperacao, setEmailRecuperacao] = useState('');
+
   const { login } = useAuth();
   const { theme } = useAccessibility();
-  const [emailRecuperacao, setEmailRecuperacao] = useState();
 
-  const handleFormSubmit = (evento) => {
-    evento.preventDefault();
-
-    if (abaAtiva === 'login') {
-      if (!dadosLogin.email || !dadosLogin.senha) {
-        toast.error('Por favor, preencha todos os campos');
-        return;
-      }
-      login(dadosLogin.email, dadosLogin.senha);
-    } else {
-      if (!dadosLogin.email) {
-        toast.error('Por favor, informe seu email');
-        return;
-      }
-      toast.info('Um email de recuperação será enviado para: ' + dadosLogin.email);
-      setAbaAtiva('login');
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    if (!dadosLogin.email || !dadosLogin.senha) {
+      toast.error('Por favor, preencha todos os campos');
+      return;
     }
-  };
-
-  const handleInputChange = (evento) => {
-    const { id, value } = evento.target;
-    setDadosLogin(prev => ({
-      ...prev,
-      [id === 'email' ? 'email' : id === 'password' ? 'senha' : id]: value
-    }));
+    login(dadosLogin.email, dadosLogin.senha);
   };
 
   const handleRecuperarSenha = async (e) => {
     e.preventDefault();
-    try {
-        const response = await api.post(`/auth/recuperar-senha?email=${emailRecuperacao}`);
-
-        toast.success("Sucesso! " + response.data);
-        setEmailRecuperacao();
-        
-    } catch (error) {
-        console.error("Erro ao recuperar senha", error);
-        toast.error("Erro ao tentar recuperar senha.");
+    if (!emailRecuperacao) {
+      toast.error("Por favor, informe seu e-mail.");
+      return;
     }
-  }
+    try {
+      const response = await api.post(`/auth/recuperar-senha?email=${emailRecuperacao}`);
+      toast.success("Sucesso! " + response.data);
+      setIsRecuperando(false);
+    } catch (error) {
+      toast.error("Erro ao tentar recuperar senha.");
+    }
+  };
 
-  const alternarAba = (novaAba) => {
-    setAbaAtiva(novaAba);
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setDadosLogin(prev => ({ ...prev, [id]: value }));
   };
 
   return (
-    <LoginContainer theme={theme} role="main" id="login-page">
+    <LoginContainer theme={theme}>
       <LoginCard theme={theme}>
-        <LoginHeader role="banner">
+        <LoginHeader>
           <LogoContainer>
-            {theme === 'light'
-              ? <LogoImage aria-label="Logo TareFiz" />
-              : <LogoImageDark aria-label="Logo TareFiz" />}
+            {theme === 'light' ? <LogoImage /> : <LogoImageDark />}
           </LogoContainer>
-          <LoginSubtitle>
-            Sistema de Gerenciamento de Tarefas
-          </LoginSubtitle>
+          <LoginSubtitle>Sistema de Gerenciamento de Tarefas</LoginSubtitle>
         </LoginHeader>
 
-        <LoginTabs theme={theme} role="tablist" aria-label="Opções de acesso">
-          <TabButton
-            theme={theme}
-            $active={abaAtiva === 'login'}
-            onClick={() => alternarAba('login')}
-            type="button"
-            role="tab"
-            aria-selected={abaAtiva === 'login'}
-            aria-controls="panel-login"
-            id="tab-login"
-          >
-            Login
-          </TabButton>
-          <TabButton
-            theme={theme}
-            $active={abaAtiva === 'recuperar'}
-            onClick={() => alternarAba('recuperar')}
-            type="button"
-            role="tab"
-            aria-selected={abaAtiva === 'recuperar'}
-            aria-controls="panel-recuperar"
-            id="tab-recuperar"
-          >
-            Recuperar Senha
-          </TabButton>
-        </LoginTabs>
-
-        {abaAtiva === 'login' ? (
-          <LoginForm 
-            id="panel-login" 
-            role="tabpanel" 
-            aria-labelledby="tab-login" 
-            onSubmit={handleFormSubmit} 
-            aria-label="Formulário de acesso ao sistema"
-          >
+        {!isRecuperando ? (
+          <LoginForm onSubmit={handleLoginSubmit}>
             <FormGroup>
-              <FormLabel htmlFor="email">
-                Email ou CPF
-              </FormLabel>
+              <FormLabel htmlFor="email">E-mail / Usuário</FormLabel>
               <FormInput
                 theme={theme}
                 type="text"
                 id="email"
-                placeholder="seu@email.com ou 000.000.000-00"
+                placeholder="seu@email.com ou seuUsuario"
                 value={dadosLogin.email}
                 onChange={handleInputChange}
-                aria-required="true"
               />
             </FormGroup>
 
             <FormGroup>
-              <FormLabel htmlFor="password">
-                Senha de Acesso
-              </FormLabel>
-              <FormInput
-                theme={theme}
-                type="password"
-                id="password"
-                placeholder="••••••••"
-                value={dadosLogin.senha}
-                onChange={handleInputChange}
-                aria-required="true"
-              />
+              <FormLabel htmlFor="senha">Senha</FormLabel>
+              <InputWrapper>
+                <FormInput
+                  theme={theme}
+                  type={verSenha ? "text" : "password"} 
+                  id="senha"
+                  placeholder="••••••••"
+                  value={dadosLogin.senha}
+                  onChange={handleInputChange}
+                />
+                <ToggleVisibilityButton 
+                  type="button" 
+                  onClick={() => setVerSenha(!verSenha)}
+                  tabIndex="-1" 
+                >
+                  {verSenha ? <IoEyeOffOutline size={22} /> : <IoEyeOutline size={22} />}
+                </ToggleVisibilityButton>
+              </InputWrapper>
             </FormGroup>
 
-            <LoginButton
-              type="submit"
-              aria-label="Entrar no sistema"
-            >
-              Entrar
-            </LoginButton>
+            <LoginButton type="submit">Entrar</LoginButton>
+
+            <ForgotPasswordLink onClick={() => setIsRecuperando(true)}>
+              Esqueceu sua senha? Clica aqui que a gente resolve!
+            </ForgotPasswordLink>
           </LoginForm>
         ) : (
-          <LoginForm 
-            id="panel-recuperar" 
-            role="tabpanel" 
-            aria-labelledby="tab-recuperar" 
-            onSubmit={handleRecuperarSenha} 
-            aria-label="Formulário para recuperar acesso"
-          >
+          <LoginForm onSubmit={handleRecuperarSenha}>
             <FormGroup>
-              <FormLabel htmlFor="email-recuperar">
-                Endereço de Email
-              </FormLabel>
+              <FormLabel htmlFor="email-recuperar">Endereço de E-mail</FormLabel>
               <FormInput
                 theme={theme}
                 type="email"
@@ -182,28 +124,16 @@ const Login = () => {
                 placeholder="seu@email.com"
                 value={emailRecuperacao}
                 onChange={(e) => setEmailRecuperacao(e.target.value)}
-                aria-required="true"
               />
             </FormGroup>
 
             <RecoveryText>
-              Enviaremos um link de recuperação para o seu email cadastrado.
+              Enviaremos um link de recuperação para o seu e-mail cadastrado.
             </RecoveryText>
 
-            <LoginButton
-              type="submit"
-              aria-label="Solicitar link de recuperação"
-            >
-              Enviar Link de Recuperação
-            </LoginButton>
+            <LoginButton type="submit">Enviar Link</LoginButton>
 
-            <BackToLoginLink
-              onClick={() => alternarAba('login')}
-              aria-label="Voltar para a tela de login"
-              role="button"
-              tabIndex="0"
-              onKeyPress={(e) => { if (e.key === 'Enter') alternarAba('login'); }}
-            >
+            <BackToLoginLink onClick={() => setIsRecuperando(false)}>
               Voltar para o Login
             </BackToLoginLink>
           </LoginForm>
