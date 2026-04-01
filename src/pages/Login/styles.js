@@ -92,14 +92,6 @@ export const LogoImageDark = styled.span`
   background-position: center;
 `;
 
-export const LoginSubtitle = styled.h2`
-  font-size: 0.9rem;
-  color: var(--text-color);
-  opacity: 0.8;
-  font-weight: 400;
-  margin: 0;
-`;
-
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;

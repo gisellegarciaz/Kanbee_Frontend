@@ -10,7 +10,6 @@ import {
   LogoContainer,
   LogoImage,
   LogoImageDark,
-  LoginSubtitle,
   LoginForm,
   FormGroup,
   FormLabel,
@@ -69,7 +68,6 @@ const Login = () => {
           <LogoContainer>
             {theme === 'light' ? <LogoImage /> : <LogoImageDark />}
           </LogoContainer>
-          <LoginSubtitle>Sistema de Gerenciamento de Tarefas</LoginSubtitle>
         </LoginHeader>
 
         {!isRecuperando ? (
